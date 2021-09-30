@@ -50,9 +50,30 @@ def run():
           msg = msg + "Enter specific number to get jokes from that category\nEg: -jokes --1"
           await message.channel.send(msg)  
         else:
-          if ("--" in message.content):
-            pass
-          await message.channel.send(get_joke())
+
+          try:
+            list_args = message.content.split("--")
+
+            if (len(list_args) <= 1):
+              await message.channel.send(get_joke(-1)) # All
+            else:
+              arg = list_args[1]
+
+
+              if (len(arg) > 1):
+                raise Exception("Please enter only one number after --")
+              else:
+                number = int(arg)
+                if (number > len(jokes_categories)):
+                  raise Exception(f"Please enter number between 1 and {len(jokes_categories)}")
+
+                await message.channel.send(get_joke(number))
+
+          except ValueError:
+              await message.channel.send("Please enter a number after -- ")
+          except Exception as e:
+              await message.channel.send(e)
+            
   try:
     client.run(os.environ['TOKEN_PFP'])
     print("TOKEN fetched in PFP")
