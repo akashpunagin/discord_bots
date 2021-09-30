@@ -2,7 +2,6 @@ import discord
 import os
 from services.quotes import get_quote
 from services.jokes import get_joke
-from services.jokes import jokes_categories
 
 def run():
 
@@ -41,38 +40,7 @@ def run():
           await message.channel.send("Pramod, I believe you have all the inspiration you need (:")
 
       if message.content.startswith('-joke'):
-        if (message.content.startswith("-joke --help")):
-          msg = "Get Jokes From \"-joke\" command !\n\nAdditional Options:\n"
-
-          for index, category in enumerate(jokes_categories):
-            msg = msg + (f"\t{index + 1}. {category}\n")
-
-          msg = msg + "Enter specific number to get jokes from that category\nEg: -jokes --1"
-          await message.channel.send(msg)  
-        else:
-
-          try:
-            list_args = message.content.split("--")
-
-            if (len(list_args) <= 1):
-              await message.channel.send(get_joke(-1)) # All
-            else:
-              arg = list_args[1]
-
-
-              if (len(arg) > 1):
-                raise Exception("Please enter only one number after --")
-              else:
-                number = int(arg)
-                if (number > len(jokes_categories)):
-                  raise Exception(f"Please enter number between 1 and {len(jokes_categories)}")
-
-                await message.channel.send(get_joke(number))
-
-          except ValueError:
-              await message.channel.send("Please enter a number after -- ")
-          except Exception as e:
-              await message.channel.send(e)
+        await message.channel.send(get_joke(message.content))
             
   try:
     client.run(os.environ['TOKEN_PFP'])
