@@ -1,6 +1,7 @@
 import discord
 import os
 from services.quotes import get_quote
+from services.jokes import get_joke
 
 def run():
 
@@ -27,6 +28,9 @@ def run():
       if message.content.startswith('-inspire'):
         quote = get_quote()
         await message.channel.send(quote)
+      
+      if message.content.startswith('-joke'):
+        await message.channel.send(get_joke(message.content))
 
   try:
     client.run(os.environ['TOKEN_CHILL_PALACE'])
