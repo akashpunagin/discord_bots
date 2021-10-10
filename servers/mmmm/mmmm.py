@@ -34,13 +34,13 @@ def run():
       if message.content.startswith('-joke'):
         await message.channel.send(get_joke(message.content))
 
-      if message.content.startswith('-angel'):
-        images = glob.glob("/home/runner/discordbots/servers/mmmm/images/*")
+      if message.content.startswith('-random'):
+        images = glob.glob("/home/runner/discordbots/servers/mmmm/images/random/*")
         random_image = random.choice(images)
         await utils.sendImageToChannel(
           __file__, 
           message.channel, 
-          os.path.sep.join(random_image.split("/")[-2:])
+          os.path.sep.join(random_image.split("/")[-3:])
         )
       
   try:
