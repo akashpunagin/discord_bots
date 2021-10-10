@@ -54,6 +54,12 @@ def run():
           message.channel, 
           os.path.sep.join(random_image.split("/")[-3:])
         )
+
+      if message.content.startswith('-song'):
+        file_path = "/home/runner/discordbots/servers/mmmm/audio/pictures_of_you.mp3"
+        await message.channel.send(
+          file = discord.File(file_path)
+        )
       
   try:
     client.run(os.environ['TOKEN_MMMM'])
