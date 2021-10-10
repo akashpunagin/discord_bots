@@ -2,6 +2,8 @@ import discord
 import os
 from services.quotes import get_quote
 from services.jokes import get_joke
+from servers.utils import utils
+
 
 def run():
 
@@ -16,8 +18,6 @@ def run():
 
   @client.event
   async def on_message(message):
-      # print('client', client.user)
-      # print('message', message.author)
       if message.author == client.user:
           return
       
@@ -41,6 +41,12 @@ def run():
 
       if message.content.startswith('-joke'):
         await message.channel.send(get_joke(message.content))
+
+      if message.content.startswith('-whos the gang'):
+          await utils.sendImageToChannel(__file__, message.channel, "images/image.jpg")
+  
+      if message.content.startswith('-whos the bitch'):
+        await utils.sendImageToChannel(__file__, message.channel, "images/pramod_image.jpg")
             
   try:
     client.run(os.environ['TOKEN_PFP'])
