@@ -29,7 +29,7 @@ def run():
         quote = get_quote()
         await message.channel.send(quote)
         if "pri" in message.content.lower():
-          await message.channel.send("Hey Pri, try -inspire-my command")
+          await message.channel.send("Hey Pri, hope this will inspire the shit out of you hahah")
 
       if message.content.startswith('-get-shit-done'):
         images = glob.glob("/home/runner/discordbots/servers/mmmm/images/get_shit_done/*")
@@ -57,6 +57,6 @@ def run():
       
   try:
     client.run(os.environ['TOKEN_MMMM'])
-    print("TOKEN fetched in PFP")
+    print("TOKEN fetched in MMMM")
   except:
-    print("ERROR IN GETTING TOKEN in PFP")
+    print("ERROR IN GETTING TOKEN in MMMM")
