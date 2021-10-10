@@ -29,7 +29,19 @@ def run():
         quote = get_quote()
         await message.channel.send(quote)
         if "pri" in message.content.lower():
-          await message.channel.send("Hey Pri, I have some ") # TODO
+          await message.channel.send("Hey Pri, try -inspire-my command")
+
+      if message.content.startswith('-get-shit-done'):
+        images = glob.glob("/home/runner/discordbots/servers/mmmm/images/get_shit_done/*")
+
+        await message.channel.send(f'Sending {len(images)} images that will make you to get shit done\n')
+        
+        for image in images:
+          await utils.sendImageToChannel(
+            __file__, 
+            message.channel, 
+            os.path.sep.join(image.split("/")[-3:])
+          )
 
       if message.content.startswith('-joke'):
         await message.channel.send(get_joke(message.content))
