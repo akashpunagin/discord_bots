@@ -56,16 +56,18 @@ def run():
             absolute_path = os.path.dirname(os.path.abspath(__file__))
             output_path = f"{absolute_path}/images/edit_image.png"
 
-            addCaptionToImage(
+            error = addCaptionToImage(
               image_path = random_image, 
               font_path = "/home/runner/discordbots/fonts/Montserrat/Montserrat-MediumItalic.ttf",
               caption = text,
               output_path = output_path,
             )
-            
-            await message.channel.send(
-              file = discord.File(output_path)
-            )
+            if (not error):
+              await message.channel.send(
+                file = discord.File(output_path)
+              )
+            else:
+              await message.channel.send(error)
           else:
             await message.channel.send("Enter the text yo! wtf")
         else:
