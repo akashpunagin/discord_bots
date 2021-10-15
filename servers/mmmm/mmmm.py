@@ -59,7 +59,7 @@ def run():
 
             addCaptionToImage(
               image_path = random_image, 
-              font_path = "/home/runner/discordbots/fonts/Montserrat/Montserrat-BlackItalic.ttf",
+              font_path = "/home/runner/discordbots/fonts/Montserrat/Montserrat-MediumItalic.ttf",
               caption = text,
               output_path = output_path,
             )
