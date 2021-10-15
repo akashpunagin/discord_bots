@@ -7,7 +7,6 @@ from services.image_edit import addCaptionToImage
 import glob
 import random
 
-
 def run():
 
   print("Running mmmm")
@@ -73,9 +72,6 @@ def run():
           await message.channel.send(
             file = discord.File(random_image)
           )
-         
-
-        
 
       if message.content.startswith('-song'):
         file_path = "/home/runner/discordbots/servers/mmmm/audio/pictures_of_you.mp3"
@@ -83,9 +79,6 @@ def run():
           file = discord.File(file_path)
         )
 
-      
-        
-      
   try:
     client.run(os.environ['TOKEN_MMMM'])
     print("TOKEN fetched in MMMM")
