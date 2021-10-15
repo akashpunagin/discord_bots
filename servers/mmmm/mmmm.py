@@ -3,6 +3,7 @@ import os
 from services.quotes import get_quote
 from services.jokes import get_joke
 from servers.utils import utils
+from services.image_edit import addTextToImage
 import glob
 import random
 
@@ -49,17 +50,41 @@ def run():
       if message.content.startswith('-random'):
         images = glob.glob("/home/runner/discordbots/servers/mmmm/images/random/*")
         random_image = random.choice(images)
-        await utils.sendImageToChannel(
-          __file__, 
-          message.channel, 
-          os.path.sep.join(random_image.split("/")[-3:])
-        )
+
+        if ("-text" in message.content):
+          text = message.content.split("-text")[-1].strip()
+          if (len(text) != 0):
+            absolute_path = os.path.dirname(os.path.abspath(__file__))
+            image_path = f"{absolute_path}/images/edit_image.png"
+
+            addTextToImage(
+              random_image, 
+              "/home/runner/discordbots/fonts/Montserrat/Montserrat-BlackItalic.ttf",
+              text,
+              image_path,
+            )
+            
+            await message.channel.send(
+              file = discord.File(image_path)
+            )
+          else:
+            await message.channel.send("Enter the text yo! wtf")
+        else:
+          await message.channel.send(
+            file = discord.File(random_image)
+          )
+         
+
+        
 
       if message.content.startswith('-song'):
         file_path = "/home/runner/discordbots/servers/mmmm/audio/pictures_of_you.mp3"
         await message.channel.send(
           file = discord.File(file_path)
         )
+
+      
+        
       
   try:
     client.run(os.environ['TOKEN_MMMM'])
