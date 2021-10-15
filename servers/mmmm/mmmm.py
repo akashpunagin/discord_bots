@@ -2,7 +2,6 @@ import discord
 import os
 from services.quotes import get_quote
 from services.jokes import get_joke
-from servers.utils import utils
 from services.image_edit import addCaptionToImage
 import glob
 import random
@@ -31,16 +30,14 @@ def run():
         if "pri" in message.content.lower():
           await message.channel.send("Hey Pri, hope this will inspire the shit out of you hahah")
 
-      if message.content.startswith('-get-shit-done'):
+      if message.content.startswith('-get shit done'):
         images = glob.glob("/home/runner/discordbots/servers/mmmm/images/get_shit_done/*")
 
         await message.channel.send(f'Sending {len(images)} images that will make you to get shit done\n')
         
         for image in images:
-          await utils.sendImageToChannel(
-            __file__, 
-            message.channel, 
-            os.path.sep.join(image.split("/")[-3:])
+          await message.channel.send(
+            file = discord.File(image)
           )
 
       if message.content.startswith('-joke'):

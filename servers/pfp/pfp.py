@@ -2,7 +2,6 @@ import discord
 import os
 from services.quotes import get_quote
 from services.jokes import get_joke
-from servers.utils import utils
 
 
 def run():
@@ -43,10 +42,18 @@ def run():
         await message.channel.send(get_joke(message.content))
 
       if message.content.startswith('-whos the gang'):
-          await utils.sendImageToChannel(__file__, message.channel, "images/image.jpg")
+        absolute_path = os.path.dirname(os.path.abspath(__file__))
+        output_path = f"{absolute_path}/images/image.jpg"
+        await message.channel.send(
+          file = discord.File(output_path)
+        )
   
       if message.content.startswith('-whos the bitch'):
-        await utils.sendImageToChannel(__file__, message.channel, "images/pramod_image.jpg")
+        absolute_path = os.path.dirname(os.path.abspath(__file__))
+        output_path = f"{absolute_path}/images/pramod_image.jpg"
+        await message.channel.send(
+          file = discord.File(output_path)
+        )
             
   try:
     client.run(os.environ['TOKEN_PFP'])
