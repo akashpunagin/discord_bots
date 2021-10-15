@@ -3,7 +3,7 @@ import os
 from services.quotes import get_quote
 from services.jokes import get_joke
 from servers.utils import utils
-from services.image_edit import addTextToImage
+from services.image_edit import addCaptionToImage
 import glob
 import random
 
@@ -55,17 +55,17 @@ def run():
           text = message.content.split("-text")[-1].strip()
           if (len(text) != 0):
             absolute_path = os.path.dirname(os.path.abspath(__file__))
-            image_path = f"{absolute_path}/images/edit_image.png"
+            output_path = f"{absolute_path}/images/edit_image.png"
 
-            addTextToImage(
-              random_image, 
-              "/home/runner/discordbots/fonts/Montserrat/Montserrat-BlackItalic.ttf",
-              text,
-              image_path,
+            addCaptionToImage(
+              image_path = random_image, 
+              font_path = "/home/runner/discordbots/fonts/Montserrat/Montserrat-BlackItalic.ttf",
+              caption = text,
+              output_path = output_path,
             )
             
             await message.channel.send(
-              file = discord.File(image_path)
+              file = discord.File(output_path)
             )
           else:
             await message.channel.send("Enter the text yo! wtf")
