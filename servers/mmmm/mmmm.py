@@ -40,6 +40,16 @@ def run():
             file = discord.File(image)
           )
 
+      if message.content.startswith('-art'):
+        images = glob.glob("/home/runner/discordbots/servers/mmmm/images/art/*")
+
+        await message.channel.send(f'Sending {len(images)} images of your art\n')
+        
+        for image in images:
+          await message.channel.send(
+            file = discord.File(image)
+          )
+
       if message.content.startswith('-joke'):
         await message.channel.send(get_joke(message.content))
 
